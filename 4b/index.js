@@ -18,7 +18,7 @@ app.set("views", "views");
 
 app.set("trush proxy", 1);
 app.use(bodyParser.json());
-app.use("/assets", express.static("assets"));
+app.use("/asset", express.static("asset"));
 app.use("/style", express.static("style"));
 app.use("/views", express.static("views"));
 
@@ -36,7 +36,7 @@ app.use(flash());
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "asset/uploads/");
+    cb(null, "../asset/uploads/");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + path.extname(file.originalname)); // Simpan dengan nama unik
@@ -72,20 +72,18 @@ async function getIndex(req, res, next) {
       res.redirect("/login");
     }
 
+    const results = await model.provinsi_tb.findAll();
     const query = `select *from finaltask.provinsi_tb pt where user_id = :isLogin`;
     const [tampil] = await db.query(query, {
       replacements: { isLogin: req.session.userId },
       typeQuery: SELECT,
     });
 
-    const results = await model.provinsi_tb.findAll();
-
     tampil.forEach((element) => {
       element.photo = JSON.parse(element.photo);
-      element.photo.path = element.photo.path.replace('\\','/')
+      element.photo.path = element.photo.path.replaceAll('\\','/')
+      console.log(element.photo);
     });
-    
-  
     
     res.render("index", { data: tampil, data2: results });
   } catch (error) {

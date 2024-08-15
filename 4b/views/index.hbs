@@ -35,7 +35,7 @@
       <form
         class="container-lg d-flex"
         style="margin-top: 40px;"
-        method="get"
+        method=""
         enctype="multipart/form-data"
       >
         {{#each data}}
@@ -58,7 +58,7 @@
                   href="/deleteProvinsi/{{this.id}}"
                 >Hapus</a>
               </div>
-              <img src={{this.photo.path}} class="card-img-top" alt="..." />
+              <img src="../{{this.photo.path}}" class="card-img-top" alt="..." />
               <div class="card-body">
                 <h5 class="card-title">{{this.nama}}</h5>
                 <p class="card-text">{{this.diresmikan}}</p>
