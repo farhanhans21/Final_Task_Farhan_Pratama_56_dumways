@@ -1,0 +1,15 @@
+body{
+  background-color: black;
+}
+#container{
+  padding-top: 8rem !important;
+}
+.button-up > h1{
+  color: white;
+}
+.container-lg .card-index{
+  display: flex;
+  flex-direction: row !important;
+  justify-content: space-evenly;
+  padding-top: 20px;
+}
